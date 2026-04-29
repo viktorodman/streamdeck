@@ -1,18 +1,18 @@
--- Launch scrcpy mirroring for the device defined in ~/.streamdeck-scrcpy.env
+-- Launch scrcpy mirroring for the device defined in config.env (path baked in by build.sh).
 
 set scrcpyPath to "/opt/homebrew/bin/scrcpy"
 set adbDir to "/opt/homebrew/bin"
-set configPath to "$HOME/.streamdeck-scrcpy.env"
+set configPath to "__CONFIG_PATH__"
 
 try
-	set deviceSerial to do shell script "set -a; . " & configPath & "; set +a; printf %s \"$DEVICE_SERIAL\""
+	set deviceSerial to do shell script "set -a; . " & quoted form of configPath & "; set +a; printf %s \"$DEVICE_SERIAL\""
 on error
-	display notification "Create ~/.streamdeck-scrcpy.env with DEVICE_SERIAL=…" with title "scrcpy: config missing"
+	display notification "Create config.env in the streamdeck repo with DEVICE_SERIAL=…" with title "scrcpy: config missing"
 	return
 end try
 
 if deviceSerial is "" or deviceSerial is "YOUR_DEVICE_SERIAL_HERE" then
-	display notification "Set DEVICE_SERIAL in ~/.streamdeck-scrcpy.env" with title "scrcpy: serial missing"
+	display notification "Set DEVICE_SERIAL in " & configPath with title "scrcpy: serial missing"
 	return
 end if
 

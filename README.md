@@ -14,10 +14,10 @@ AppleScript automations bound to Stream Deck buttons.
 
 1. Copy the example config and set your Android device serial:
    ```sh
-   cp config.example.env ~/.streamdeck-scrcpy.env
-   # edit ~/.streamdeck-scrcpy.env and set DEVICE_SERIAL=YOUR_SERIAL
+   cp config.example.env config.env
+   # edit config.env and set DEVICE_SERIAL=YOUR_SERIAL
    ```
-   Find your serial with `adb devices`.
+   Find your serial with `adb devices`. `config.env` is gitignored, so each user's serial stays local.
 
 2. Compile the AppleScripts to `.app` bundles:
    ```sh

@@ -1,9 +1,9 @@
--- Kill running scrcpy session for the device defined in ~/.streamdeck-scrcpy.env
+-- Kill running scrcpy session for the device defined in config.env (path baked in by build.sh).
 
-set configPath to "$HOME/.streamdeck-scrcpy.env"
+set configPath to "__CONFIG_PATH__"
 
 try
-	set deviceSerial to do shell script "set -a; . " & configPath & "; set +a; printf %s \"$DEVICE_SERIAL\""
+	set deviceSerial to do shell script "set -a; . " & quoted form of configPath & "; set +a; printf %s \"$DEVICE_SERIAL\""
 on error
 	return
 end try
